@@ -1,0 +1,68 @@
+---
+import { STEPS } from '../data/content';
+const initialStep = STEPS[0];
+---
+
+<section class="sec" id="bootcamp">
+  <div class="wrap">
+    <div class="split rev">
+      <div class="col-stage">
+        <div class="stage sm" data-stage="pipeline" role="img" aria-label="Four connected nodes: Apify, n8n, OpenAI and Google APIs, with data pulses moving left to right">
+          <p class="cap">Data moves left to right</p>
+        </div>
+      </div>
+      <div class="stack">
+        <p class="eyebrow">Real-world execution · Bootcamp</p>
+        <h2 class="h2">The GWD AI Automation Bootcamp.</h2>
+        <div class="body">
+          <p>A hands-on build programme where members wire real tools into working automations. The stack is n8n, OpenAI, Google APIs and Apify. Each tool owns one stage of the pipeline.</p>
+          <p>Members leave with workflows they built, tested and can show, not slides about them.</p>
+        </div>
+        <div class="chips">
+          <span class="chip accent">n8n</span>
+          <span class="chip accent">OpenAI</span>
+          <span class="chip accent">Google APIs</span>
+          <span class="chip accent">Apify</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="steps" id="steps" role="group" aria-label="Pipeline stages">
+      {STEPS.map((s, i) => (
+        <button
+          type="button"
+          class="p-step"
+          aria-controls="p-detail"
+          aria-pressed={i === 0 ? "true" : "false"}
+          data-index={i}
+        >
+          <span class="p-verb">{s.verb}</span>
+          <span class="p-tool">{s.tool}</span>
+        </button>
+      ))}
+    </div>
+    <div class="p-detail panel" id="p-detail" aria-live="polite">
+      <h3>{initialStep.verb} with {initialStep.tool}</h3>
+      <p>{initialStep.text}</p>
+    </div>
+
+    <div class="example">
+      <span class="mono">Example workflow</span>
+      <span class="chip">Scrape listings</span>
+      <span class="arrow">→</span>
+      <span class="chip">Score with OpenAI</span>
+      <span class="arrow">→</span>
+      <span class="chip">Orchestrate in n8n</span>
+      <span class="arrow">→</span>
+      <span class="chip">Log to Sheets, mail a digest</span>
+    </div>
+
+    <div class="sprint panel">
+      <div>
+        <h3>Hackathons and build sprints</h3>
+        <p>Time-boxed builds on real briefs, finished with a live demo. Teams mix verticals so a builder, a storyteller and an organiser ship together.</p>
+      </div>
+      <span class="slot">Next event · to be announced</span>
+    </div>
+  </div>
+</section>

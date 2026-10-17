@@ -1,0 +1,51 @@
+---
+import { TEAM, VERTICALS } from '../data/content';
+
+const leaders = [TEAM.president, TEAM.vp];
+---
+
+<section class="sec" id="team">
+  <div class="wrap">
+    <p class="eyebrow">Leadership</p>
+    <h2 class="h2">The people holding the controls.</h2>
+    <div class="leaders" id="leaders">
+      {leaders.map(p => (
+        <article class="person panel">
+          {p.photo ? (
+            <div class="avatar"><img src={p.photo} alt={p.name || ''} /></div>
+          ) : (
+            <div class="avatar" aria-hidden="true">{p.initials}</div>
+          )}
+          <div>
+            <p class="role-l">{p.role}</p>
+            <h3>{p.name}</h3>
+            <p class="d">{p.desc}</p>
+          </div>
+        </article>
+      ))}
+    </div>
+    <div class="leads" id="leads">
+      {VERTICALS.map(v => {
+        const lead = TEAM.leads[v.id] || { name: null, photo: null };
+        const has = !!lead.name;
+        const init = has
+          ? lead.name!.split(/\s+/).map(w => w[0]).slice(0, 2).join('').toUpperCase()
+          : '+';
+        return (
+          <article class={`lead-card ${has ? 'filled' : 'empty'}`}>
+            {lead.photo ? (
+              <div class="avatar"><img src={lead.photo} alt={lead.name || ''} /></div>
+            ) : (
+              <div class="avatar" aria-hidden="true">{init}</div>
+            )}
+            <div>
+              <p class="role-l">{v.leadRole}</p>
+              <h3>{has ? lead.name : 'To be announced'}</h3>
+            </div>
+          </article>
+        );
+      })}
+    </div>
+    <p class="team-note">Vertical leads will be announced here.</p>
+  </div>
+</section>

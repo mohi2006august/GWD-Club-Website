@@ -1,0 +1,44 @@
+---
+import { VERTICALS } from '../data/content';
+const initial = VERTICALS[0];
+---
+
+<section class="sec" id="verticals">
+  <div class="wrap">
+    <div class="split">
+      <div>
+        <p class="eyebrow">Operational structure</p>
+        <h2 class="h2">Six verticals. Each one owns real work.</h2>
+        <p class="lead" style="margin-top:16px">Every member joins a vertical and ships inside it. Pick one to see what it does and how it connects to the others.</p>
+        <div class="v-list" id="v-list" role="group" aria-label="Club verticals">
+          {VERTICALS.map((v, i) => (
+            <button
+              type="button"
+              class="v-item"
+              aria-controls="v-detail"
+              aria-pressed={i === 0 ? "true" : "false"}
+              data-index={i}
+            >
+              <span class="v-mark" aria-hidden="true"></span>
+              <span class="v-name">{v.name}</span>
+              <span class="v-tag">{v.tag}</span>
+            </button>
+          ))}
+        </div>
+      </div>
+      <div class="col-stage">
+        <div class="stage" data-stage="verticals" role="img" aria-label="Six nodes in a ring around a core, one for each vertical; the selected vertical turns to face you">
+          <p class="cap">Selected vertical turns to face you</p>
+        </div>
+        <div class="v-detail panel" id="v-detail" aria-live="polite">
+          <h3>{initial.name}</h3>
+          <p class="v-line">{initial.line}</p>
+          <ul>
+            {initial.does.map(d => <li>{d}</li>)}
+          </ul>
+          <p class="v-with">Works closely with: <b>{initial.withV}</b></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

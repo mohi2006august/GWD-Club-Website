@@ -1,0 +1,89 @@
+---
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import Preloader from '../components/Preloader.astro';
+import NavRail from '../components/NavRail.astro';
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = "GWD Club · Hyderabad | Get Work Done",
+  description = "GWD Club is the student-driven tech and innovation ecosystem of GWD Global Pvt Ltd. Flagship hub: VJIT Hyderabad."
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="claude:viewport-fit-sides" content="cover" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" />
+
+    <!-- Modern Google Fonts: Syne (Display), Space Grotesk (Headings), Plus Jakarta Sans (Info/Body), JetBrains Mono (Tech/Mono) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Outfit:wght@500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&family=Syne:wght@700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Synchronous theme initializer to prevent FOUC -->
+    <script is:inline>
+      try {
+        var _t = localStorage.getItem('gwd-theme');
+        if (_t) document.documentElement.dataset.theme = _t;
+      } catch (e) {}
+    </script>
+  </head>
+  <body>
+    <!-- Persistent WebGL 3D Background Canvas -->
+    <canvas id="gl" aria-hidden="true"></canvas>
+
+    <!-- 3D Interactive Preloader -->
+    <Preloader />
+
+    <div class="page">
+      <!-- Pill Navigation Header -->
+      <Header />
+
+      <!-- Side Navigation Rail with Scroll Depth -->
+      <NavRail />
+
+      <!-- Main Page Content -->
+      <main>
+        <slot />
+      </main>
+
+      <!-- Footer -->
+      <Footer />
+    </div>
+
+    <!-- Custom Bracket Cursor & Scroll Progress FX -->
+    <div id="fx-ring"></div>
+    <div id="fx-dot"></div>
+    <div id="fx-bar"></div>
+
+    <!-- Three.js & Postprocessing CDN Scripts -->
+    <script is:inline src="https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.min.js"></script>
+    <script is:inline src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/shaders/CopyShader.js"></script>
+    <script is:inline src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/shaders/LuminosityHighPassShader.js"></script>
+    <script is:inline src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/EffectComposer.js"></script>
+    <script is:inline src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/MaskPass.js"></script>
+    <script is:inline src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/ShaderPass.js"></script>
+    <script is:inline src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/RenderPass.js"></script>
+    <script is:inline src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/UnrealBloomPass.js"></script>
+
+    <!-- App Engine Scripts -->
+    <script is:inline src="/scripts/three-scene.js"></script>
+    <script is:inline src="/scripts/preloader.js"></script>
+    <script is:inline src="/scripts/interactions.js"></script>
+  </body>
+</html>
